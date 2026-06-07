@@ -1,66 +1,66 @@
-import json
-
-# Define the README content
-readme_text = """# Spatial Inequities in the Degradation of Night Sky Visibility
+# Spatial Inequities in the Degradation of Night Sky Visibility
 ### Globe at Night × UNDP HDI — Full Analysis Pipeline
 
 ---
 
 ### IMPORTANT DEVELOPMENT DISCLAIMER
-This research pipeline was initially designed, structured, and written via human-driven coding. Following the initial core development, an AI assistant was utilized exclusively to clean up code syntax, reformat documentation cells, standardize data harmonization dictionaries, and apply professional styling to the statistical visualizations. The underlying methodology, research design, and interpretive logic remain completely human-conceived.
+This project was originally designed, structured, and written entirely me. After the core code and logic were complete, an AI assistant was used to clean up code formatting, fix typos, organize documentation cells, standardize data dictionaries, and make the charts look clean and professional. The core research design, ideas, and coding are completely human-made.
 
 ---
 
-## Research Overview
-This repository contains a comprehensive analytical notebook that investigates the global relationship between human development and environmental degradation—specifically, the loss of the night sky due to artificial light pollution. 
+## Project Overview
+This repository holds a Python notebook that looks at how human development impacts the environment. Specifically, it studies how global light pollution cuts down our view of the night sky. 
 
-**Core Research Question:** How does average naked-eye night sky visibility (limiting magnitude) relate to a country's Human Development Index (HDI), and is that relationship linear or nonlinear?
+**Main Question:** How does the average brightness of a country's night sky relate to its Human Development Index (HDI), and is this relationship a straight line or a curve?
 
-By cross-referencing citizen-science night sky observations from the **Globe at Night** project (2006–2024) with the United Nations Development Programme (**UNDP**) Human Development Index, this analysis explores whether spatial inequities in light pollution follow a monotonic trend or a complex, non-linear trajectory.
+The project answers this by combining citizen-science night sky data from the **Globe at Night** project (2006–2024) with the United Nations Development Programme (**UNDP**) Human Development Index. It checks if light pollution grows steadily with development, or if it follows a more complicated, non-linear path.
 
 ---
 
 ## Data Dictionary
 
-| Variable / Term | Definition |
+| Variable / Term | What It Means |
 | :--- | :--- |
-| **LimitingMag** | The limiting magnitude represents the faintest star visible to the naked eye under current local sky conditions. A higher value denotes a darker, less light-polluted sky. The scale ranges from 1 (only the Moon or brightest planets are visible) to approximately 7 (pristine, natural dark sky). |
-| **HDI (Value)** | The UN Human Development Index is a composite statistic measuring average achievement in three basic dimensions of human development: a long and healthy life, knowledge, and a decent standard of living. Scale ranges from 0 to 1 (higher equals greater development). |
-| **valid_data_points** | The total count of raw citizen-science observations for a specific country that passed strict quality filtering (limiting magnitude strictly within the range of 1 to 7). This metric serves as a reliability indicator for country-level averages. |
+| **LimitingMag** | Limiting magnitude is a measure of how faint a star you can see with your naked eye. A higher number means a darker sky with less light pollution. The scale goes from 1 (very bright sky; you can only see the moon or bright planets) to about 7 (a perfectly dark, natural sky). |
+| **HDI (Value)** | The UN Human Development Index scores countries from 0 to 1 based on life expectancy, education, and income. A higher number means a higher level of development. |
+| **valid_data_points** | The number of clean citizen-science observations recorded for a country. This only counts observations with a valid sky brightness rating between 1 and 7. It helps show how reliable a country's average score is. |
 
 ---
 
-## Technical Architecture & Notebook Structure
+## Notebook Structure
 
-The analysis is executed sequentially through a single Jupyter notebook (`Updated_Results.ipynb`), divided into ten distinct structural phases:
+The analysis runs step-by-step through a single Jupyter notebook (`Updated_Results.ipynb`), divided into ten parts:
 
-1. **Setup & Imports:** Standardizes the environment by importing specialized statistical, machine learning, and optimization packages (`scipy.stats`, `statsmodels`, `scikit-learn`, `optuna`).
-2. **Data Loading & Preprocessing:** * Compiles annual multi-year CSV files from the Globe at Night database (2006–2024).
-   * Standardizes and harmonizes cross-dataset country nomenclatures (e.g., mapping historical or stylistic naming variances to match official UNDP records).
-   * Filters out geographical territories lacking dedicated HDI evaluations to remove analytical noise.
-3. **Exploratory Visualizations:** Uses LOWESS smoothing on raw observations and log-scaled bubble scatterplots to evaluate initial trends without imposing strict functional forms.
-4. **Baseline Regression:** Establishes standard benchmark models assuming monotonic structures, including Pearson/Spearman correlation matrices, ordinary linear regression, and logarithmic functions.
-5. **Nonlinearity Investigation (Core Novel Analysis):**
-   * Fits a quadratic regression model and conducts a formal F-test on the quadratic term.
-   * Calculates the exact turning/peak point mathematically to locate maximum sky visibility.
-   * Replicates the workflow on a sample-size-filtered subset ($\ge 30$ valid data points) to prevent small-sample anomalies from warping results.
-   * Conducts piecewise linear segmentations and an HDI tertile-split ANOVA direction test.
-6. **Advanced Predictive Modeling:** Implements higher-degree polynomial cross-validation, alongside Random Forest and Gradient Boosting architectures fine-tuned via Optuna hyperparameter optimization.
-7. **Model Comparison:** Ranks all linear, non-linear, and ensemble models side-by-side using Cross-Validated $R^2$ and Cross-Validated Root Mean Squared Error (RMSE).
-8. **Residual Diagnostics:** Evaluates the primary quadratic OLS model using residual-versus-fitted plots, histogram frequencies, and a Shapiro-Wilk normality assessment.
-9. **Country-Level Visualizations:** Visualizes the top 20 darkest and top 20 most light-polluted nations using sample-size filters, alongside quartile box plots.
-10. **Final Results Summary:** Consolidates the statistical findings and presents programmatic conclusions.
-
----
-
-## Key Statistical Findings
-
-* **The Fallacy of Linear Metrics:** Traditional linear correlation tests (Pearson and Spearman) yield near-zero coefficients. This occurs because the true relationship is non-linear; the positive left half and the negative right half of the distribution mathematically cancel each other out in linear equations.
-* **The Inverted-U Trajectory:** The quadratic model uncovers a highly significant inverted-U curve ($p$-value is statistically robust under the F-test). Night sky visibility is low in least-developed nations, reaches a peak around a medium HDI tier ($\approx 0.650–0.700$), and subsequently degrades severely as countries cross into high and very high development brackets.
-* **Low Predictive Variance ($R^2$):** Cross-validated models show low overall $R^2$ scores across the board. This indicates that while the non-linear trend is statistically real, HDI alone is not a sufficient predictor of light pollution. Factors such as localized population density, urban grid design, and regional energy policies account for the vast remainder of variance.
+1. **Setup & Imports:** Loads the necessary Python tools for data handling, graphing, and statistics (like `scipy.stats`, `statsmodels`, `scikit-learn`, and `optuna`).
+2. **Data Loading & Cleaning:** * Combines yearly files from the Globe at Night database (2006–2024).
+   * Standardizes country names so the datasets match up perfectly.
+   * Removes small territories that do not have an official UN HDI score.
+3. **Initial Charts:** Uses smooth trend lines and bubble plots to get a first look at the data without forcing it into a specific mathematical shape.
+4. **Baseline Models:** Tests standard straight-line and logarithmic models to see if the relationship is linear.
+5. **Testing for Curves (Core Analysis):**
+   * Fits a curved (quadratic) line to the data and checks if it is statistically meaningful.
+   * Calculates the exact peak point to find where night skies are the clearest.
+   * Runs the same test on a filtered group of countries with at least 30 observations to make sure small sample sizes aren't ruining the results.
+   * Splits the data into segments and groups to double-check the direction of the trend.
+6. **Advanced Machine Learning:** Tests advanced models like Random Forest and Gradient Boosting, using an optimizer called Optuna to find the best settings.
+7. **Comparing Models:** Ranks all models side-by-side using accuracy metrics to see which one predicts sky clarity best.
+8. **Error Checks (Diagnostics):** Evaluates the main curved model to ensure the errors are distributed normally and don't show hidden biases.
+9. **Country Breakdown:** Identifies and charts the top 20 darkest and top 20 brightest countries, using data filters to keep it accurate.
+10. **Final Summary:** Gathers all the key statistics and prints out clear conclusions.
 
 ---
 
-## Requirements & Environment
+## Key Findings
 
-To run this pipeline, ensure your Python environment has the following dependencies installed:
+* **Straight Lines Don't Work:** Standard correlation tests show almost zero relationship. This happens because the true trend is a curve that goes up and then down. A straight-line test gets confused by this shape and mathematically cancels the trend out.
+* **The Inverted-U Shape:** The curved model proves that night sky visibility starts out low in developing nations, reaches its clearest point in medium-developed nations (HDI around 0.650 to 0.700), and then drops sharply as countries become highly developed.
+* **HDI Doesn't Explain Everything:** Even though the curved trend is real and statistically significant, the overall models have low predictive power ($R^2$). This means HDI alone cannot predict light pollution. Local issues like city layout, population density, and local energy laws matter much more.
+
+---
+
+## Requirements
+
+To run this notebook, you will need to install these Python packages:
+
+```bash
+pip install numpy pandas matplotlib seaborn scipy scikit-learn statsmodels openpyxl optuna
