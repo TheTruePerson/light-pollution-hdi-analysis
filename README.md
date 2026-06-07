@@ -3,8 +3,8 @@
 
 ---
 
-### IMPORTANT DEVELOPMENT DISCLAIMER
-This project was originally designed, structured, and written by myself. However, **I also used an AI assistant was used to clean up code formatting, fix typos, organize documentation cells, standardize data dictionaries, and make the charts look clean and professional**
+# IMPORTANT DEVELOPMENT DISCLAIMER
+## This project was originally designed, structured, and written by myself. However, **I also used an AI assistant was used to clean up code formatting, fix typos, organize documentation cells, standardize data dictionaries, and make the charts look clean and professional**
 
 ---
 
