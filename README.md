@@ -4,7 +4,7 @@
 ---
 
 ### IMPORTANT DEVELOPMENT DISCLAIMER
-This project was originally designed, structured, and written entirely me. After the core code and logic were complete, an AI assistant was used to clean up code formatting, fix typos, organize documentation cells, standardize data dictionaries, and make the charts look clean and professional. The core research design, ideas, and coding are completely human-made.
+This project was originally designed, structured, and written by myself. However, **I also used an AI assistant was used to clean up code formatting, fix typos, organize documentation cells, standardize data dictionaries, and make the charts look clean and professional**
 
 ---
 
