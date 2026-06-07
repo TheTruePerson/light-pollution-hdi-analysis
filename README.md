@@ -5,7 +5,7 @@
 
 # IMPORTANT:
 ## This project was designed, structured, and programmed by myself. However, **I also used an AI assistant was used to clean up code formatting, fix typos, organize documentation cells, standardize data dictionaries, and make the charts look clean and professional along with the general IPYNB format. **
-
+(Also, both TheTruePerson and ralseipuffin are me)
 ---
 
 ## Project Overview
